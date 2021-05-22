@@ -1,0 +1,24 @@
+{
+  "23eesdas": {
+    "firebaseKey": "23eesdas",
+    "userId": "rja9ehPmvBZZWpIxMHPm3CwxeEs1",
+    "organizationId": "12sdsdf",
+    "displayName": "Trinity Christiana",
+    "username": "trinitychristiana",
+    "isAdmin": true,
+    "active": true,
+    "profilePic": "https://react.semantic-ui.com/images/wireframe/image.png",
+    "bio": "Test bio"
+  },
+  "wdf45rdfs": {
+    "firebaseKey": "wdf45rdfs",
+    "userId": "rja9ehPmvBZZWpIxMHPm3CwxeEs1",
+    "organizationId": "weqdasdsa",
+    "displayName": "Trinity Christiana 2",
+    "username": "trinitychristiana2",
+    "isAdmin": true,
+    "active": true,
+    "profilePic": "https://react.semantic-ui.com/images/wireframe/image.png",
+    "bio": "Test bioasadasd"
+  }
+}
