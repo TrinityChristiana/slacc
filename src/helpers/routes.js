@@ -1,18 +1,11 @@
 import React from 'react';
 import {
   Redirect,
+  Route,
   Switch
 } from 'react-router-dom';
 import App from '../components/App';
-// import LoggedOutRoute from '../components/custom-routes/LoggedOutRoute';
 import PrivateRoute from '../components/custom-routes/PrivateRoute';
-// import ChannelPage from '../containers/ChannelPage';
-// import CreateOrgPage from '../containers/CreateOrgPage';
-// import ComposePage from '../containers/ComposePage';
-// import HomePage from '../containers/HomePage';
-// import OrgPage from '../containers/OrganizationPage';
-// import SelectOrgPage from '../containers/SelectOrgPage';
-// import UserDetailsPage from '../containers/UserDetailsPage';
 
 const Routes = () => (
   <Switch>
@@ -25,12 +18,16 @@ const Routes = () => (
     {/* <PrivateRoute path='/o/:orgId/:channelId' component={ChannelPage} /> */}
     <PrivateRoute
       path={[
-        '/',
         '/o/:orgId',
         '/o/:orgId/compose',
         '/o/:orgId/user_profile/:userId',
         '/o/:orgId/:channelId'
       ]}
+      exact
+      component={App}
+    />
+    <Route
+      path='/'
       exact
       component={App}
     />
