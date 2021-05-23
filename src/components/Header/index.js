@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuth } from '../../contexts/auth-context';
 import LoggedInHeader from './LoggedInHeader';
+import LoggedOutHeader from './LoggedOutHeader';
 
 const Header = () => {
   const {
@@ -16,7 +17,7 @@ const Header = () => {
     return <LoggedInHeader/>;
   }
 
-  return null;
+  return <LoggedOutHeader/>;
 };
 
 export default Header;

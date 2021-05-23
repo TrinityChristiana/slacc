@@ -1,7 +1,7 @@
 Features
 - Organizations
   - Create
-  - Read
+  - ~~Read~~
   - Update
   - Delete
 - Users

@@ -5,9 +5,9 @@ import 'firebase/storage';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
-import App from './components/App';
 import { AuthProvider } from './contexts/auth-context';
 import firebaseConfig from './helpers/apiKeys';
+import Routes from './helpers/routes';
 import './styles/main.scss';
 
 firebase.initializeApp(firebaseConfig);
@@ -15,7 +15,7 @@ firebase.initializeApp(firebaseConfig);
 ReactDOM.render(
   <Router>
     <AuthProvider>
-      <App />
+      <Routes/>
     </AuthProvider>
   </Router>,
   document.getElementById('root')

@@ -20,5 +20,16 @@
     "active": true,
     "profilePic": "https://react.semantic-ui.com/images/wireframe/image.png",
     "bio": "Test bioasadasd"
+  },
+  "456455654654": {
+    "firebaseKey": "456455654654",
+    "userId": "234234wefawersdaweraew",
+    "organizationId": "34dsfdfsdf",
+    "displayName": "nottrinity2",
+    "username": "nottrinity",
+    "isAdmin": true,
+    "active": true,
+    "profilePic": "https://react.semantic-ui.com/images/wireframe/image.png",
+    "bio": "nottrinity"
   }
 }
