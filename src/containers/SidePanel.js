@@ -1,10 +1,13 @@
 import React from 'react';
 import {
   Button,
+  Divider,
   Dropdown,
   Grid,
   Header,
-  Menu
+  Icon,
+  Menu,
+  Popup
 } from 'semantic-ui-react';
 import { useAuth } from '../contexts/auth-context';
 import { useOrg } from '../contexts/org-context';
@@ -41,6 +44,29 @@ const SidePanel = () => {
     },
   ];
 
+  const orgMenuItems = [
+    {
+      key: 'invite',
+      content: <span><Icon name='user plus'/> Invite people to {name}</span>,
+      disabled: true
+    },
+    {
+      key: 'channel',
+      content: <span><Icon name='hashtag'/> Create Channel</span>,
+      disabled: true
+    },
+    {
+      key: 'manage',
+      content: <span><Icon name='settings'/> Manage Workspace</span>,
+      disabled: true
+    },
+    {
+      key: 'leave',
+      content: <span><Icon name='sign-out'/> Leave Organization</span>,
+      disabled: true
+    },
+  ];
+
   return (
     <Menu
       size='large'
@@ -53,12 +79,26 @@ const SidePanel = () => {
       }}
     >
       <Grid>
-        <Grid.Column>
-          <Header inverted as='h3'>
-            {name || 'Select an Org'}
-          </Header>
+        <Grid.Row >
+          <Popup
+            trigger={
+              <Header inverted as='h3'>
+                {name || 'Select an Org'}
+              </Header>
+            }
+            hideOnScroll
+            on='click'
+          >
+            <Menu
+              items={orgMenuItems}
+              secondary
+              vertical
+            />
+          </Popup>
+        </Grid.Row>
+
+          <Divider/>
           <Header inverted as='h4'>{user ? <Dropdown trigger={user.displayName} options={dropdownOptions()}></Dropdown> : <Button onClick={signInUser}>Sign In</Button>}</Header>
-        </Grid.Column>
       </Grid>
     </Menu>
   );
