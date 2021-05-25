@@ -33,6 +33,14 @@ const getOrganization = (orgId) => new Promise((resolve) => {
   });
 });
 
+const deactivateUserOrganization = (userOrgKey) => new Promise((resolve) => {
+  axiosCall.patch(`/organization_users/${userOrgKey}.json`, { deactivated: true, accepted: false }).then(resolve);
+});
+
+const activateUserOrganization = (userOrgKey) => new Promise((resolve) => {
+  axiosCall.patch(`/organization_users/${userOrgKey}.json`, { deactivated: false }).then(resolve);
+});
+
 const getUsersOrganizations = (uid) => new Promise((resolve) => {
   axiosCall.get(`/organization_users.json/?orderBy="userId"&equalTo="${uid}"`).then((resp) => {
     const orgUsers = Object.values(resp.data);
@@ -42,6 +50,30 @@ const getUsersOrganizations = (uid) => new Promise((resolve) => {
     Promise.all(orgs).then((resplvedOrgs) => {
       resolve(resplvedOrgs);
     });
+  });
+});
+
+const getUsersUsers = (uid) => new Promise((resolve) => {
+  axiosCall.get(`/organization_users.json/?orderBy="userId"&equalTo="${uid}"`).then((resp) => resolve(Object.values(resp.data)));
+});
+
+const getAllOrganizations = () => new Promise((resolve) => {
+  const { uid } = firebase.auth().currentUser;
+  const orgProm = axiosCall.get('/organizations.json')
+    .then((resp) => Object.values(resp.data));
+  const userOrgProm = getUsersUsers(uid);
+  Promise.all([orgProm, userOrgProm]).then(([orgs, userOrgs]) => {
+    resolve(orgs.map((org) => {
+      const userIndex = userOrgs
+        .findIndex((uo) => (
+          uo.organizationId === org.firebaseKey
+        ));
+      return ({
+        ...org,
+        userInOrg: userIndex !== -1,
+        userOrg: userOrgs[userIndex]
+      });
+    }));
   });
 });
 
@@ -64,7 +96,9 @@ const createOrganization = (orgObj) => new Promise((resolve) => {
       active: false,
       profilePic,
       organizationId: firebaseKey,
-      bio: ''
+      bio: '',
+      accepted: true,
+      deactivated: false
     });
     Promise.all([updateOrgProm, userOrgProm]).then(() => getUsersOrganizations(userId).then((userOrgs) => resolve([userOrgs, firebaseKey])));
   });
@@ -72,5 +106,9 @@ const createOrganization = (orgObj) => new Promise((resolve) => {
 export {
   getUsersOrganizations,
   getOrganization,
-  createOrganization
+  createOrganization,
+  getAllOrganizations,
+  createUserOrg,
+  deactivateUserOrganization,
+  activateUserOrganization
 };

@@ -8,7 +8,8 @@ import {
   Sidebar
 } from 'semantic-ui-react';
 import useAllParams from '../components/custom-hooks/useAllParams';
-import OrgModal from '../components/modals/OrgModal';
+import BrowseOrgModal from '../components/modals/BrowseOrgModal';
+import OrgFormModal from '../components/modals/OrgFormModal';
 import { useAuth } from '../contexts/auth-context';
 
 const OrgPanel = () => {
@@ -46,9 +47,13 @@ const OrgPanel = () => {
         );
       })}
       <Divider />
-      <OrgModal>
+      <OrgFormModal>
         <Button icon='add' color='blue' size='small' />
-      </OrgModal>
+      </OrgFormModal>
+      <Divider />
+      <BrowseOrgModal>
+        <Button icon='search' color='blue' size='small' />
+      </BrowseOrgModal>
     </Sidebar>
   );
 };

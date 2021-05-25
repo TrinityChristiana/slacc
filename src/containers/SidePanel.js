@@ -47,7 +47,7 @@ const SidePanel = () => {
   const orgMenuItems = [
     {
       key: 'invite',
-      content: <span><Icon name='user plus'/> Invite people to {name}</span>,
+      content: <span><Icon name='user plus'/> Check waitlist </span>,
       disabled: true
     },
     {

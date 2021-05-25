@@ -15,7 +15,7 @@ const defaultInfoState = {
   image: ''
 };
 
-const OrgModal = ({ children, firebaseKey }) => {
+const OrgFormModal = ({ children, firebaseKey }) => {
   const [open, setOpen] = React.useState(false);
   const [isLoading, setIsLoading] = useState(!!(firebaseKey));
   const [orgFormInfo, setOrgFormInfo] = useState(defaultInfoState);
@@ -46,8 +46,8 @@ const OrgModal = ({ children, firebaseKey }) => {
   return (
     <Modal size='tiny' onClose={() => setOpen(false)} onOpen={() => setOpen(true)} open={open} trigger={children}>
       <Modal.Header>{firebaseKey ? 'Edit' : 'Create'} An Organization</Modal.Header>
-      <Modal.Content image>
-        <Form style={{ width: '100%' }} error={canSubmit} loading={isLoading}>
+      <Modal.Content>
+        <Form error={canSubmit} loading={isLoading}>
           <Form.Group
             widths='equal'
           >
@@ -102,4 +102,4 @@ const OrgModal = ({ children, firebaseKey }) => {
   );
 };
 
-export default OrgModal;
+export default OrgFormModal;
