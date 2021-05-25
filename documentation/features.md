@@ -1,11 +1,14 @@
 Features
 - Organizations
-  - Create
+  - ~~Create~~
   - ~~Read~~
+    - Only view orgs yours apart of
   - Update
   - Delete
 - Users
   - Create
+    - ~~When org is created~~
+    - WHen added to org
   - Read
   - Update
   - Delete
@@ -32,7 +35,7 @@ Features
 
 Routes
 ## `/`
-- View orgs you are apart of
+- ~~View orgs you are apart of~~
 
 ## `/o/:orgId`
 - Will take you to the general channel for this org
@@ -54,9 +57,3 @@ Routes
 
 ## `/o/:orgId/:channelId/user_profile/:userId`
 - Allows user to view details of user in a side menu
-
-
-
-
-MVP
-- User can create an organization

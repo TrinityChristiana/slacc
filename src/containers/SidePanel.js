@@ -7,30 +7,38 @@ import {
   Menu
 } from 'semantic-ui-react';
 import { useAuth } from '../contexts/auth-context';
+import { useOrg } from '../contexts/org-context';
 
 const SidePanel = () => {
   const { authUser: user, signOutUser, signInUser } = useAuth();
+  const {
+    orgInfo: { name },
+  } = useOrg();
 
   const dropdownOptions = () => [
     {
       key: 'info',
-      text: <span>Signed in as <strong>{user.displayName}</strong></span>,
-      disabled: true
+      text: (
+        <span>
+          Signed in as <strong>{user.displayName}</strong>
+        </span>
+      ),
+      disabled: true,
     },
     {
       key: 'viewProfile',
       text: <span>View Profile</span>,
-      disabled: true
+      disabled: true,
     },
     {
       key: 'editProfile',
       text: <span>Edit Profile</span>,
-      disabled: true
+      disabled: true,
     },
     {
       key: 'signOut',
-      text: <span onClick={signOutUser}>Sign Out</span>
-    }
+      text: <span onClick={signOutUser}>Sign Out</span>,
+    },
   ];
 
   return (
@@ -46,17 +54,10 @@ const SidePanel = () => {
     >
       <Grid>
         <Grid.Column>
-          <Grid.Row>
-            <Header inverted as='h2' floated='left'>
-              <Header.Content>Slacc</Header.Content>
-            </Header>
-          </Grid.Row>
-          <Header as='h4'>
-            {user ? <Dropdown
-              trigger={'User'}
-              options={dropdownOptions()}
-            ></Dropdown> : <Button onClick={signInUser}>Sign In</Button>}
+          <Header inverted as='h3'>
+            {name || 'Select an Org'}
           </Header>
+          <Header inverted as='h4'>{user ? <Dropdown trigger={user.displayName} options={dropdownOptions()}></Dropdown> : <Button onClick={signInUser}>Sign In</Button>}</Header>
         </Grid.Column>
       </Grid>
     </Menu>

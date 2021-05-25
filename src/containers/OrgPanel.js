@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   Button,
@@ -8,22 +8,16 @@ import {
   Sidebar
 } from 'semantic-ui-react';
 import useAllParams from '../components/custom-hooks/useAllParams';
+import OrgModal from '../components/modals/OrgModal';
 import { useAuth } from '../contexts/auth-context';
-import { getUsersOrganizations } from '../helpers/data/organizations';
 
 const OrgPanel = () => {
   const { authUser: user } = useAuth();
   const { orgId } = useAllParams();
 
-  const [allOrgs, setAllOrgs] = useState([]);
-
-  useEffect(() => {
-    getUsersOrganizations(user.uid).then(setAllOrgs);
-  }, []);
-
   return (
     <Sidebar as={Menu} icon='labeled' inverted vertical visible width='very thin'>
-      {allOrgs.map((org) => {
+      {user.userOrgs.map((org) => {
         const isCurrent = org.firebaseKey === orgId;
         return (
           <React.Fragment key={org.firebaseKey}>
@@ -51,9 +45,10 @@ const OrgPanel = () => {
           </React.Fragment>
         );
       })}
-
       <Divider />
-      <Button icon='add' color='blue' size='small' />
+      <OrgModal>
+        <Button icon='add' color='blue' size='small' />
+      </OrgModal>
     </Sidebar>
   );
 };
